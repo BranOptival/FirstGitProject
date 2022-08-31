@@ -1,5 +1,6 @@
 from datetime import datetime
 
-current_time = datetime.now().utcnow()
+dt_string = datetime.now()
+current_time= dt_string.strftime("%d/%m/%Y %H:%M:%S")
 
 print(current_time)
