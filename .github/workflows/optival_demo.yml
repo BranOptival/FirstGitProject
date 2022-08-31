@@ -20,7 +20,6 @@ jobs:
         run: |
            echo "::set-output name=response::$(python optivalDemo.py)"
       - name: check the value
-      - uses: actions/checkout@v3
         run: |
           echo ${${{ steps.getimage.outputs.response }}}
         shell: bash
@@ -31,7 +30,7 @@ jobs:
           status: ${{ job.status }} # required
           notify_when: 'failure'
           notification_title: 'Doda production testing has {status_message}'
-          message_format: '{emoji} *Link to the report* : {$response}'
+          message_format: '{emoji} *Link to the report* : {${${{ steps.getimage.outputs.response }}}}'
           footer: 'Linked to last running tests on GitHub action'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_CHANNEL }}
