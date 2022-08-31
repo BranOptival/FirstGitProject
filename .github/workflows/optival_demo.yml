@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python application
+name: Optival Demo
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
     - cron: '* 20 * * *'
 
 jobs:
-  build:
+  bran-optival-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,8 +28,8 @@ jobs:
         uses: ravsamhq/notify-slack-action@v1
         with:
           status: ${{ job.status }} # required
-          notification_title: 'Doda production testing has {status_message}'
-          message_format: '{emoji} *Link to the report* : ${{ steps.getimage.outputs.response }}'
-          footer: 'Linked to last running tests on GitHub action'
+          notification_title: '{workflow} has {status_message}'
+          message_format: '{emoji} *Current date:* ${{ steps.getimage.outputs.response }}'
+          footer: 'Linked to {workflow} test on GitHub action'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_CHANNEL }}
