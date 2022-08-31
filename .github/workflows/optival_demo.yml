@@ -16,12 +16,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: get output value
-        id: getimage
+        id: getdate
         run: |
            echo "::set-output name=response::$(python optivalDemo.py)"
       - name: check the value
         run: |
-          echo ${${{ steps.getimage.outputs.response }}}
+          echo ${{ steps.getdate.outputs.response }}
         shell: bash
       - name: Send to Slack
         if: always()
@@ -29,7 +29,7 @@ jobs:
         with:
           status: ${{ job.status }} # required
           notification_title: '{workflow} has {status_message}'
-          message_format: '{emoji} *Current date:* ${{ steps.getimage.outputs.response }}'
+          message_format: '{emoji} *Current date:* ${{ steps.getdate.outputs.response }}'
           footer: 'Linked to {workflow} test on GitHub action'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_CHANNEL }}
